@@ -2,7 +2,7 @@ import java.lang.*;
 import java.util.Scanner;
 
 
-public class BAGEOWaterBillAnnualSummary {
+public class SURNAMEWaterBillAnnualSummary {
     public static void main(String[] args) {
         int[] presentReading= new int[12];
         int[] startReading= new int[12];
