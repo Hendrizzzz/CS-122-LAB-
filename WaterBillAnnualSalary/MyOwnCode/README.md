@@ -15,8 +15,10 @@ String name = consumer.getName();
 String type = consumer.getConsumerType();
 double startingReading = consumer.getStartingWaterMeterReading();
 double[] readings = consumer.getWaterReadingPerMonth();
+```
 
-## Constructor
+
+### 2.  Constructor
 
 /**
  * Constructs a new Consumer with the specified details.
