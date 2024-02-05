@@ -45,6 +45,17 @@ public class Fraction {
 
     // Setter method for denominator
     public void setDenominator(int denominator) {
+        // If the numerator and denominator is negative, then the fraction is positive
+        if(getNumerator() < 0 && denominator < 0){
+            setNumerator(-getNumerator());
+            this.denominator = -denominator;
+            return;
+        }
+        else if (denominator < 0 && getNumerator() > 0){
+            setNumerator(-getNumerator());
+            this.denominator = -denominator;
+            return;
+        }
         this.denominator = denominator;
     }
 
