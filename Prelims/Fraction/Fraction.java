@@ -10,6 +10,7 @@ public class Fraction {
 
     }
 
+    // * this is not used, it can be used but the driver/main class would need edit because it differs a lil bit in the program design/structure. I'm lazy to do that rn
     // Constructor with parameters
     public Fraction(int numerator, int denominator){
         // Check if the numerator is 0, then the fraction is simply 0;
@@ -26,7 +27,7 @@ public class Fraction {
             return;
         }
 
-        // Check if the denominator is 0 and the numerator is positive, place the negative sign on the numerator for better readability on output
+        // Check if the denominator is negative and the numerator is positive, place the negative sign on the numerator for better readability on output
         else if (denominator < 0){
             this.numerator = -numerator;
             this.denominator = Math.abs(denominator);
@@ -69,6 +70,19 @@ public class Fraction {
         return denominator;
     }
 
+    /**
+     * Method for converting fraction to its decimal form
+     * Only return the 3 decimal places better output view, though less accurate
+     * wow my first javadoc comment
+     * @return double
+     */
+    public double toDecimal(){
+        double decimal =  (double) getNumerator() / getDenominator();
+        String decimalString =  String.format("%.3f", decimal);
+        return Double.parseDouble(decimalString);
+    }
+
+    // Built-in method but I don't want its pre-made format
     @Override
     public String toString() {
         return getNumerator() + VINCULUM + getDenominator();
