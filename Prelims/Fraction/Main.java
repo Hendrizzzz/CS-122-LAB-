@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 public class Main {
     private static final FractionOperations operate = new FractionOperations();
     private static final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+    // both of these are for buffered reader problem purposes
     private static int attempts = 0;
     private static final int MAX_ATTEMPTS = 3;
 
@@ -44,6 +46,12 @@ public class Main {
         System.exit(0);
     }
 
+    /**
+     * Creates two objects of 'Fraction' for the 2 fractions to operate on
+     * Calls the 'setUpTwoFractions' to populate the numerator and denominator of the fractions
+     * Then calls the add method of the 'FractionOperation' class through the instance / object of it, 'operate' which was created at the top of the class
+     * Then it is place on the third object of 'Fraction' and result message is displayed
+     */
     private void addTwoFractions() {
         // I used the default constructor here because I'd like to
         Fraction fraction1 = new Fraction();
@@ -52,7 +60,7 @@ public class Main {
         setUpTheTwoFractions(fraction1, fraction2);
 
         Fraction sum = operate.add(fraction1, fraction2);
-        System.out.println("The sum of " + fraction1 + " and " + fraction2 + " is " + sum.toString());
+        System.out.println("The sum of " + fraction1 + " and " + fraction2 + " is " + sum.toString() + " or " + sum.toDecimal());
         System.out.println(); // Formatting purposes
     }
 
@@ -66,7 +74,7 @@ public class Main {
         setUpTheTwoFractions(fraction1, fraction2);
 
         Fraction difference = operate.subtract(fraction1, fraction2);
-        System.out.println("The difference of " + fraction1 + " and " + fraction2 + " is " + difference.toString());
+        System.out.println("The difference of " + fraction1 + " and " + fraction2 + " is " + difference.toString() + " or " + difference.toDecimal());
         System.out.println(); // Formatting purposes
     }
 
@@ -78,7 +86,7 @@ public class Main {
         setUpTheTwoFractions(fraction1, fraction2);
 
         Fraction product = operate.multiply(fraction1, fraction2);
-        System.out.println("The product of " + fraction1 + " and " + fraction2 + " is " + product.toString());
+        System.out.println("The product of " + fraction1 + " and " + fraction2 + " is " + product.toString() + " or " + product.toDecimal());
         System.out.println();// Formatting purposes
     }
 
@@ -89,8 +97,8 @@ public class Main {
 
         setUpTheTwoFractions(fraction1, fraction2);
 
-        Fraction difference = operate.divide(fraction1, fraction2);
-        System.out.println("The quotient of " + fraction1 + " and " + fraction2 + " is " + difference.toString());
+        Fraction quotient = operate.divide(fraction1, fraction2);
+        System.out.println("The quotient of " + fraction1 + " and " + fraction2 + " is " + quotient.toString() + " or " + quotient.toDecimal());
         System.out.println(); // Formatting purposes
     }
 
@@ -126,6 +134,7 @@ public class Main {
     private int getDenominator(String fractionPosition){
         boolean validDenominator = false;
         int numerator = 0;
+
         do{
             System.out.print("Enter the Denominator of the " + fractionPosition + " fraction: ");
 
