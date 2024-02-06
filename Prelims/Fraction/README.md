@@ -1,6 +1,5 @@
 # Fraction Operations Program
-
-This Java program performs operations on fractions, including addition, subtraction, multiplication, and division.
+This Java program, with the Main class as the driver class, performs operations on fractions using the Fraction template for fractions and OperationsOnFractions template for the operations.
 
 ## Usage
 1. Choose an operation from the menu.
