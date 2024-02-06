@@ -1,5 +1,6 @@
 package CS122Exercises.OperationsOnFractions;
 
+// Can't make those comments a javadoc in my ide so I used multiline comments instead
 public class FractionOperations {
 
     // Default Constructor but explicitly added
@@ -8,6 +9,13 @@ public class FractionOperations {
     }
 
 
+    /**
+     * Adds two fractions and returns the result as a new Fraction object.
+     * wow this one is a javadoc
+     * @param fraction1 the first fraction to be added
+     * @param fraction2 the second fraction to be added
+     * @return the sum of the two fractions
+     */
     public Fraction add(Fraction fraction1, Fraction fraction2){
         // Create an instance of the Fraction to place the resulting sum and return
         Fraction sumOfTwoFractions = new Fraction();
@@ -114,13 +122,21 @@ public class FractionOperations {
 
 
     private void reduceIfPossible(Fraction fraction){
+        // Get the positive / absolute value of the num and denom, because they might be negative
         int numerator = Math.abs(fraction.getNumerator());
         int denominator = Math.abs(fraction.getDenominator());
+
+
+        /*
+         * start from the lowest , for example 30/50, start from 30 to 2 and check if it can divide both num and denom
+         * if so, then that should be their greatest common factor
+         * update the numerator and denom, and return
+         * */
         for(int i = Math.min(numerator, denominator); i > 1; i--){
             if (fraction.getNumerator() % i == 0 && fraction.getDenominator() % i == 0){
                 fraction.setNumerator(fraction.getNumerator() / i);
                 fraction.setDenominator(fraction.getDenominator() / i);
-                break;
+                return;
             }
         }
     }
