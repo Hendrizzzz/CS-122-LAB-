@@ -1,4 +1,4 @@
-package CS122Exercises.OperationsOnFractions;
+package CS122Exercises.OperationsOnFractions.Version1;
 
 // Can't make those comments a javadoc in my ide so I used multiline comments instead
 public class FractionOperations {
@@ -100,11 +100,11 @@ public class FractionOperations {
         // Create an instance of the Fraction to place the resulting difference and return
         Fraction quotientOfTwoFractions = new Fraction();
 
-        /*
+        /**
          * Set the numerator of the 'quotientOfTwoFractions' Fraction
          * Basically just multiply the numerator of the first fraction to the denominator of the second fraction
          * Interchange the values of the numerator and denominator of the second fraction then just do straight multiplication
-         * */
+         */
         quotientOfTwoFractions.setNumerator(fraction1.getNumerator() * fraction2.getDenominator());
 
 
@@ -114,6 +114,7 @@ public class FractionOperations {
          * */
         quotientOfTwoFractions.setDenominator(fraction1.getDenominator() * fraction2.getNumerator());
 
+        // Check if the resulting denominator is 0, then return
         // Reduce if possible
         reduceIfPossible(quotientOfTwoFractions);
 
@@ -121,6 +122,10 @@ public class FractionOperations {
     }
 
 
+    /**
+     *
+     * method to reduce fractions
+     */
     private void reduceIfPossible(Fraction fraction){
         // Get the positive / absolute value of the num and denom, because they might be negative
         int numerator = Math.abs(fraction.getNumerator());
