@@ -1,4 +1,4 @@
-package CS122Exercises.OperationsOnFractions;
+package CS122Exercises.OperationsOnFractions.Version2;
 
 public class Fraction {
     private int numerator;
@@ -39,12 +39,22 @@ public class Fraction {
         this.denominator = denominator;
     }
 
-    // Setter method for numerator
+    /**
+     * Sets the numerator of the fraction to the specified value.
+     *
+     * @param numerator The numerator value to set.
+     */
     public void setNumerator(int numerator) {
         this.numerator = numerator;
     }
 
-    // Setter method for denominator
+
+    /**
+     * Setter the denominator of the fraction to the specified value.
+     *
+     * @param denominator The denominator value to set
+     */
+
     public void setDenominator(int denominator) {
         // If the numerator and denominator is negative, then the fraction is positive
         if(getNumerator() < 0 && denominator < 0){
@@ -60,31 +70,55 @@ public class Fraction {
         this.denominator = denominator;
     }
 
-    // Getter method for numerator
+
+    /**
+     * Retrieves the numerator of the fraction.
+     *
+     * @return The numerator value of the fraction.
+     */
     public int getNumerator() {
         return numerator;
     }
 
-    // Getter method for denominator
+
+    /**
+     * Retrieves the denominator of the fraction
+     *
+     * @return The denominator value of the fraction
+     */
     public int getDenominator() {
         return denominator;
     }
 
     /**
-     * Method for converting fraction to its decimal form
-     * Only return the 3 decimal places better output view, though less accurate
-     * wow my first javadoc comment
-     * @return double
+     * Converts the fraction to its decimal form.
+     * Returns the decimal value with three decimal places for better output view, though less accurate.
+     *
+     * @return The decimal form of the fraction with three decimal places.
      */
-    public double toDecimal(){
-        double decimal =  (double) getNumerator() / getDenominator();
-        String decimalString =  String.format("%.3f", decimal);
+    public double toDecimal() {
+        double decimal = (double) getNumerator() / getDenominator();
+        String decimalString = String.format("%.3f", decimal);
         return Double.parseDouble(decimalString);
     }
 
-    // Built-in method but I don't want its pre-made format
+
+    /**
+     * Returns the string representation of the fraction.
+     * If the denominator is 0, returns "undefined" (for division).
+     * If the numerator is 0 or the denominator is 1, returns only the numerator.
+     * Otherwise, returns the fraction in the format "numerator/denominator".
+     *
+     * @return The string representation of the fraction.
+     */
     @Override
     public String toString() {
+        if (numerator == 0 || denominator == 1) {
+            return String.valueOf(numerator);
+        } else if (denominator == 0) {
+            return "undefined"; // for division
+        }
         return getNumerator() + VINCULUM + getDenominator();
     }
+
 }
