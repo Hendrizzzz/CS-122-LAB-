@@ -1,4 +1,4 @@
-package CS122Exercises.OperationsOnFractions;
+package CS122Exercises.OperationsOnFractions.Version1;
 
 public class Fraction {
     private int numerator;
@@ -85,6 +85,8 @@ public class Fraction {
     // Built-in method but I don't want its pre-made format
     @Override
     public String toString() {
+        if (numerator == 0 || denominator == 1) return String.valueOf(numerator);
+        else if (denominator == 0) return "undefined"; // for division
         return getNumerator() + VINCULUM + getDenominator();
     }
 }
