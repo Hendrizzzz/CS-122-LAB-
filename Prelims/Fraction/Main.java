@@ -1,4 +1,4 @@
-package CS122Exercises.OperationsOnFractions;
+package CS122Exercises.OperationsOnFractions.Version1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -60,8 +60,9 @@ public class Main {
         setUpTheTwoFractions(fraction1, fraction2);
 
         Fraction sum = operate.add(fraction1, fraction2);
-        System.out.println("The sum of " + fraction1 + " and " + fraction2 + " is " + sum.toString() + " or " + sum.toDecimal());
-        System.out.println(); // Formatting purposes
+        System.out.print("The sum of " + fraction1 + " and " + fraction2 + " is " + sum.toString());
+        if(sum.toString().contains("/")) System.out.print(" or " + sum.toDecimal());
+        System.out.println("\n"); // Formatting purposes
     }
 
 
@@ -74,8 +75,9 @@ public class Main {
         setUpTheTwoFractions(fraction1, fraction2);
 
         Fraction difference = operate.subtract(fraction1, fraction2);
-        System.out.println("The difference of " + fraction1 + " and " + fraction2 + " is " + difference.toString() + " or " + difference.toDecimal());
-        System.out.println(); // Formatting purposes
+        System.out.print("The difference of " + fraction1 + " and " + fraction2 + " is " + difference.toString());
+        if(difference.toString().contains("/")) System.out.print(" or " + fraction1.toDecimal());
+        System.out.println("\n"); // Formatting purposes
     }
 
     private void multiplyTwoFractions() {
@@ -86,8 +88,9 @@ public class Main {
         setUpTheTwoFractions(fraction1, fraction2);
 
         Fraction product = operate.multiply(fraction1, fraction2);
-        System.out.println("The product of " + fraction1 + " and " + fraction2 + " is " + product.toString() + " or " + product.toDecimal());
-        System.out.println();// Formatting purposes
+        System.out.print("The product of " + fraction1 + " and " + fraction2 + " is " + product.toString());
+        if(product.toString().contains("/")) System.out.print(" or " + product.toDecimal());
+        System.out.println("\n");// Formatting purposes
     }
 
     private void divideTwoFractions() {
@@ -98,8 +101,9 @@ public class Main {
         setUpTheTwoFractions(fraction1, fraction2);
 
         Fraction quotient = operate.divide(fraction1, fraction2);
-        System.out.println("The quotient of " + fraction1 + " and " + fraction2 + " is " + quotient.toString() + " or " + quotient.toDecimal());
-        System.out.println(); // Formatting purposes
+        System.out.print("The quotient of " + fraction1 + " and " + fraction2 + " is " + quotient.toString());
+        if(quotient.toString().contains("/")) System.out.print(" or " + quotient.toDecimal());
+        System.out.println("\n"); // Formatting purposes
     }
 
 
