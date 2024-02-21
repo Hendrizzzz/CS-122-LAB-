@@ -1,27 +1,27 @@
-package CS122Exercises.OperationsOnFractions.Version1;
+package CS122Exercises.OperationsOnFractions.Version3;
+
 
 public class Fraction {
     private int numerator;
     private int denominator;
-    private final String VINCULUM = "/";
 
     // Default constructor
     public Fraction(){
 
     }
 
+    public Fraction(Fraction fraction) {
+        this.numerator = fraction.getNumerator();
+        this.denominator = fraction.getDenominator();
+    }
+
+
+
     // * this is not used, it can be used but the driver/main class would need edit because it differs a lil bit in the program design/structure. I'm lazy to do that rn
     // Constructor with parameters
     public Fraction(int numerator, int denominator){
-        // Check if the numerator is 0, then the fraction is simply 0;
-        if(numerator == 0){
-            this.denominator = 0;
-            this.numerator = 0;
-            return;
-        }
-
         // Check if the fraction has both numerator and denominator negative, then the fraction is positive
-        else if (numerator < 0 && denominator < 0){
+        if (numerator < 0 && denominator < 0){
             this.numerator = Math.abs(numerator);
             this.denominator = Math.abs(denominator);
             return;
@@ -39,54 +39,255 @@ public class Fraction {
         this.denominator = denominator;
     }
 
-    // Setter method for numerator
+
+    /**
+     * Sets the numerator of the fraction to the specified value.
+     *
+     * @param numerator The numerator value to set.
+     */
     public void setNumerator(int numerator) {
         this.numerator = numerator;
     }
 
-    // Setter method for denominator
-    public void setDenominator(int denominator) {
+
+    /**
+     * Setter the denominator of the fraction to the specified value.
+     *
+     * @param denominator The denominator value to set
+     */
+    public boolean setDenominator(int denominator) {
+        if (denominator == 0) return false;
         // If the numerator and denominator is negative, then the fraction is positive
         if(getNumerator() < 0 && denominator < 0){
             setNumerator(-getNumerator());
             this.denominator = -denominator;
-            return;
+            return true;
         }
         else if (denominator < 0 && getNumerator() > 0){
             setNumerator(-getNumerator());
             this.denominator = -denominator;
-            return;
+            return true;
         }
         this.denominator = denominator;
+        return true;
     }
 
-    // Getter method for numerator
+
+    /**
+     * Retrieves the numerator of the fraction.
+     *
+     * @return The numerator value of the fraction.
+     */
     public int getNumerator() {
         return numerator;
     }
 
-    // Getter method for denominator
+
+    /**
+     * Retrieves the denominator of the fraction
+     *
+     * @return The denominator value of the fraction
+     */
     public int getDenominator() {
         return denominator;
     }
 
+
+
+
     /**
-     * Method for converting fraction to its decimal form
-     * Only return the 3 decimal places better output view, though less accurate
-     * wow my first javadoc comment
-     * @return double
+     * Converts the fraction to its decimal form.
+     * Returns the decimal value with three decimal places for better output view, though less accurate.
+     *
+     * @return The decimal form of the fraction with three decimal places.
      */
-    public double toDecimal(){
-        double decimal =  (double) getNumerator() / getDenominator();
-        String decimalString =  String.format("%.3f", decimal);
+    public double toDouble() {
+        double decimal = (double) getNumerator() / getDenominator();
+        String decimalString = String.format("%.3f", decimal);
         return Double.parseDouble(decimalString);
     }
 
-    // Built-in method but I don't want its pre-made format
+
+    /**
+     * Returns the string representation of the fraction.
+     * If the denominator is 0, returns "undefined" (for division).
+     * If the numerator is 0 or the denominator is 1, returns only the numerator.
+     * Otherwise, returns the fraction in the format "numerator/denominator".
+     *
+     * @return The string representation of the fraction.
+     */
     @Override
     public String toString() {
-        if (numerator == 0 || denominator == 1) return String.valueOf(numerator);
-        else if (denominator == 0) return "undefined"; // for division
+        if (numerator == 0 || denominator == 1) {
+            return String.valueOf(numerator);
+        } else if (denominator == 0) {
+            return "undefined"; // for division
+        }
+        String VINCULUM = "/";
         return getNumerator() + VINCULUM + getDenominator();
     }
-}
+
+
+
+
+    /**
+     * Reduces the fraction to its simplest form by dividing both the numerator and denominator
+     * by their greatest common divisor (GCD).
+     */
+    public void reduce() {
+        int gcd = computeGCD();
+        setNumerator(this.numerator / gcd);
+        setDenominator(this.denominator / gcd);
+    }
+
+    /**
+     * Computes the greatest common divisor (GCD) of the numerator and denominator
+     * using Euclid's algorithm.
+     *
+     * @return the GCD of the numerator and denominator
+     */
+    private int computeGCD() {
+        int numerator = getNumerator();
+        int denominator = getDenominator();
+
+        // Euclid's algorithm to compute GCD
+        while (denominator != 0) {
+            int temp = denominator;
+            denominator = numerator % denominator;
+            numerator = temp;
+        }
+        return numerator;
+    }
+
+
+
+
+    /**
+     * Adds another fraction to this fraction.
+     *
+     * <p>The method computes the result of adding the specified {@code anotherFraction}
+     * to this fraction and sets the numerator and denominator accordingly. It uses the formula:
+     *
+     * <pre>
+     *   resultNumerator = (this.numerator * anotherFraction.getDenominator() +
+     *                      anotherFraction.getNumerator() * this.denominator);
+     *   resultDenominator = (this.denominator * anotherFraction.getDenominator());
+     * </pre>
+     *
+     * <p>After setting the numerator and denominator, the method reduces the fraction to its
+     * simplest form by dividing both the numerator and denominator by their greatest common divisor (GCD).
+     *
+     * @param anotherFraction the fraction to be added to this fraction
+     */
+    public Fraction add (Fraction anotherFraction) {
+
+        // Set the denominator of the sumOfTwoFractions Fraction by multiplying the denominators
+        int numerator = (this.numerator * anotherFraction.getDenominator() +
+                         anotherFraction.getNumerator() * this.denominator);
+        int denominator = (this.denominator * anotherFraction.getDenominator());
+
+        Fraction sum = new Fraction(numerator, denominator);
+        sum.reduce();
+        return sum;
+    } // end of the method -> add
+
+
+
+    /**
+     * Subtracts another fraction from this fraction.
+     *
+     * <p>The method computes the result of subtracting the specified {@code anotherFraction}
+     * from this fraction and sets the numerator and denominator accordingly. It uses the formula:
+     *
+     * <pre>
+     *   resultNumerator = (this.numerator * anotherFraction.getDenominator() -
+     *                      anotherFraction.getNumerator() * this.numerator);
+     *   resultDenominator = (this.denominator * anotherFraction.getDenominator());
+     * </pre>
+     *
+     * <p>After setting the numerator and denominator, the method reduces the fraction to its
+     * simplest form by dividing both the numerator and denominator by their greatest common divisor (GCD).
+     *
+     * @param anotherFraction the fraction to be subtracted from this fraction
+     */
+    public Fraction subtract (Fraction anotherFraction) {
+        // Set the denominator of the sumOfTwoFractions Fraction by multiplying the denominators
+        int numerator = (this.numerator * anotherFraction.getDenominator() -
+                         anotherFraction.getNumerator() * this.denominator);
+
+        // Set the denominator of the sumOfTwoFractions Fraction by multiplying the denominators
+        int denominator = (this.denominator * anotherFraction.getDenominator());
+
+        Fraction difference = new Fraction(numerator, denominator);
+        difference.reduce();
+        return difference;
+    } // end of the method -> subtract
+
+
+
+
+    /**
+     * Multiplies this fraction by another fraction.
+     *
+     * <p>The method computes the result of multiplying this fraction by the specified {@code anotherFraction}
+     * and sets the numerator and denominator accordingly. It uses the formula:
+     *
+     * <pre>
+     *   resultNumerator = (this.numerator * anotherFraction.getNumerator());
+     *   resultDenominator = (this.denominator * anotherFraction.getDenominator());
+     * </pre>
+     *
+     * <p>After setting the numerator and denominator, the method reduces the fraction to its
+     * simplest form by dividing both the numerator and denominator by their greatest common divisor (GCD).
+     *
+     * @param anotherFraction the fraction to be multiplied by this fraction
+     */
+    public Fraction multiplyBy (Fraction anotherFraction) {
+        // Set the denominator of the sumOfTwoFractions Fraction by multiplying the denominators
+        int numerator = (this.numerator * anotherFraction.getNumerator());
+
+        // Set the denominator of the sumOfTwoFractions Fraction by multiplying the denominators
+        int denominator = (this.denominator * anotherFraction.getDenominator());
+
+        Fraction product = new Fraction(numerator, denominator);
+        product.reduce();
+        return product;
+    } // end of the method -> multiplyBy
+
+
+
+
+/**
+ * Divides this fraction by another fraction.
+ *
+ * <p>The method computes the result of dividing this fraction by the specified {@code anotherFraction}
+ * and sets the numerator and denominator accordingly. It uses the formula:
+ *
+ * <pre>
+ *   resultNumerator = (this.numerator * anotherFraction.getDenominator());
+ *   resultDenominator = (this.denominator * anotherFraction.getNumerator());
+ * </pre>
+ *
+ * <p>After setting the numerator and denominator, the method reduces the fraction to its
+ * simplest form by dividing both the numerator and denominator by their greatest common divisor (GCD).
+ *
+ * @param anotherFraction the fraction to divide this fraction by
+ * */
+    public Fraction divideBy (Fraction anotherFraction) {
+
+        // Set the denominator of the sumOfTwoFractions Fraction by multiplying the denominators
+        int numerator = (this.numerator * anotherFraction.getDenominator());
+
+        // Set the denominator of the sumOfTwoFractions Fraction by multiplying the denominators
+        int denominator = (this.denominator * anotherFraction.getNumerator());
+
+        Fraction quotient = new Fraction(numerator, denominator);
+        quotient.reduce();
+
+        return quotient;
+    } // end of the method -> divideBy
+
+
+
+
+} // end of the class
