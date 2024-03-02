@@ -1,4 +1,4 @@
-package CS122Exercises.OperationsOnFractions.Version3;
+package prog2.prelim;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,9 +17,16 @@ public class FractionArithmetic {
         } catch (IOException e){
             System.out.println("An error occurred while reading the input: " + e.getMessage());
         }
-    }
+    } // end of the main method
 
 
+
+
+    /**
+     * Runs the fraction arithmetic program.
+     *
+     * @throws IOException If an I/O error occurs.
+     */
     private void run() throws IOException {
         while(true){
             int choice = getUserChoice();
@@ -29,11 +36,20 @@ public class FractionArithmetic {
                 System.out.println("Thank you for using the program! ");
                 break;
             }
+            // if the user chose to reduce a fraction
+            else if (choice == 5){
+                Fraction fraction = new Fraction();
+                setUpNumerator("Enter Numerator: ", fraction);
+                setUpDenominator("Enter Denominator: ", fraction);
+                Fraction reducedFraction = new Fraction (fraction);
+                reducedFraction.reduce();
+                displayResult(fraction, reducedFraction);
+            }
 
             // else, operate
             operate(choice);
         }
-    }
+    } // end of the run method
 
 
     /**
@@ -43,33 +59,31 @@ public class FractionArithmetic {
      * @throws IOException If an I/O error occurs.
      */
     private void operate(int choice) throws IOException {
-        // Perform a single fraction operation -> Reduce Fraction
-        if (choice == 5) {
-            Fraction fraction = new Fraction();
-            setUpNumerator("Enter Numerator: ", fraction);
-            setUpDenominator("Enter Denominator: ", fraction);
-            Fraction reducedFraction = new Fraction (fraction);
-            reducedFraction.reduce();
-            displayResult(fraction, reducedFraction);
-            return;
-        }
-
         // Set up the first fraction
         Fraction firstFraction = setUpFirstFraction();
         // Set up the second fraction
         Fraction secondFraction = setUpSecondFraction();
 
-        // Perform the arithmetic operation based on the user's choice
+        // Display the result of the arithmetic operation
         switch (choice){
             case 1 -> displayResult(firstFraction, secondFraction, firstFraction.add(secondFraction), "+", "adding");
             case 2 -> displayResult(firstFraction, secondFraction, firstFraction.subtract(secondFraction), "-", "subtracting");
             case 3 -> displayResult(firstFraction, secondFraction, firstFraction.multiplyBy(secondFraction), "x", "multiplying");
             case 4 -> displayResult(firstFraction, secondFraction, firstFraction.divideBy(secondFraction), "÷", "dividing");
         }
-    }
+    } // end of method -> operate
 
 
-    // prompt user for choice until valid
+
+
+
+
+    /**
+     * Prompts the user for their choice until a valid one is entered.
+     *
+     * @return The user's choice.
+     * @throws IOException If an I/O error occurs.
+     */
     private int getUserChoice() throws IOException {
         while (true){
             try{
@@ -95,7 +109,7 @@ public class FractionArithmetic {
     } // end of method -> displayUserChoice()
 
 
-    // helper method of getUserChoice() method
+    // Display the menu of the program
     private void displayMenu() {
         System.out.print("""
                         +-------------------------------+
@@ -113,32 +127,35 @@ public class FractionArithmetic {
 
 
 
+    // Set up a fraction by prompting the user for numerator and denominator
+    private Fraction setUpFraction(String fractionName) throws IOException {
+        Fraction fraction = new Fraction();
+        System.out.println("--------------------------------");
+        System.out.println("Setting up " + fractionName + " Fraction...");
+        setUpNumerator("Enter Numerator of " + fractionName + " Fraction: ", fraction);
+        setUpDenominator("Enter Denominator of " + fractionName + " Fraction: ", fraction);
+        return fraction;
+    }
 
+    // Set up the first fraction
     private Fraction setUpFirstFraction() throws IOException {
-        Fraction firstFraction = new Fraction();
-        System.out.println("--------------------------------");
-        System.out.println("Setting up First Fraction...");
-        setUpNumerator("Enter Numerator of First Fraction: ", firstFraction);
-        setUpDenominator("Enter Denominator of First Fraction: ", firstFraction);
-        return firstFraction;
+        return setUpFraction("First");
     }
 
-
+    // Set up the second fraction
     private Fraction setUpSecondFraction() throws IOException {
-        Fraction secondFraction = new Fraction();
-        System.out.println("--------------------------------");
-        System.out.println("Setting up Second Fraction...");
-        setUpNumerator("Enter Numerator of Second Fraction: ", secondFraction);
-        setUpDenominator("Enter Denominator of Second Fraction: ", secondFraction);
-        return secondFraction;
+        return setUpFraction("Second");
     }
 
 
+
+    // Set up the numerator for a fraction
     private void setUpNumerator(String message, Fraction fraction) throws IOException {
         int numerator = readInteger(message);
         fraction.setNumerator(numerator);
     }
 
+    // Set up the denominator for a fraction
     private void setUpDenominator(String prompt, Fraction fraction) throws IOException {
         do {
             int denominator = readInteger(prompt);
@@ -148,6 +165,7 @@ public class FractionArithmetic {
     }
 
 
+    // Read an integer from the user
     private int readInteger(String prompt) throws IOException {
         while (true) {
             try {
@@ -160,7 +178,7 @@ public class FractionArithmetic {
     }
 
 
-    // display result with format
+    // Display the result of fraction arithmetic with format
     private void displayResult(Fraction firstFraction, Fraction secondFraction, Fraction result, String operation, String term) {
         System.out.println("Result of " + term + " fractions:");
         System.out.println("╔═════════════════════════╗");
@@ -176,7 +194,7 @@ public class FractionArithmetic {
         System.out.println("╚═════════════════════════╝\n\n");
     }
 
-    // display result for reducing fraction operation
+    // Display result for reducing fraction operation
     private void displayResult(Fraction fraction, Fraction resultingFraction) {
         System.out.println("The simplest form of " + fraction.toString() + " is " + resultingFraction.toString());
     }
