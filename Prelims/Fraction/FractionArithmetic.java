@@ -70,9 +70,9 @@ public class FractionArithmetic {
      */
     private void operate(int choice) throws IOException {
         // Set up the first fraction
-        Fraction firstFraction = setUpFirstFraction();
+        Fraction firstFraction = setUpFraction("First");
         // Set up the second fraction
-        Fraction secondFraction = setUpSecondFraction();
+        Fraction secondFraction = setUpFraction("Second");
 
         // Display the result of the arithmetic operation
         switch (choice){
@@ -85,8 +85,7 @@ public class FractionArithmetic {
 
 
 
-
-
+    
 
     /**
      * Prompts the user for their choice until a valid one is entered.
@@ -141,23 +140,12 @@ public class FractionArithmetic {
     private Fraction setUpFraction(String prompt) throws IOException {
         Fraction fraction = new Fraction();
         System.out.println(PURPLE + "--------------------------------" + RESET);
-        System.out.println(BOLD + "Setting up %s Fraction..." + RESET, prompt);
+        System.out.println(BOLD + "Setting up " + prompt + " Fraction..." + RESET);
         setUpNumerator("Enter Numerator of " + prompt + " Fraction: ", fraction);
         setUpDenominator("Enter Denominator of " + prompt + " Fraction: ", fraction);
         return fraction;
     }
-
-    // Set up first fraction
-    private Fraction setUpFirstFraction() throws IOException {
-        return setUpFraction("First");
-    }
-
-    // Set up second fraction
-    private Fraction setUpSecondFraction() throws IOException {
-        return setUpFraction("Second");
-    }
-
-
+    
 
     // Set up the numerator for a fraction
     private void setUpNumerator(String message, Fraction fraction) throws IOException {
