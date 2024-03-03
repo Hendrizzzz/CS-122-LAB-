@@ -6,7 +6,17 @@ import java.io.InputStreamReader;
 
 public class FractionArithmetic {
     private static final BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-    private static final String INVALID_INPUT = "Invalid input. Please enter an integer. Try again. ";
+
+    // Define ANSI escape codes for text formatting in the terminal
+    // These codes are used to display text in different colors and styles
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String PURPLE = "\u001B[34m";
+    public static final String BOLD = "\u001B[1m";
+
+    private static final String INVALID_INPUT = RED + BOLD + "Invalid input. Please enter an integer. Try again. " + RESET;
+    private static final String INVALID_DENOMINATOR = RED + "Denominator cannot be zero. Try again. " + RESET;
 
 
     public static void main(String[] args) {
@@ -15,7 +25,7 @@ public class FractionArithmetic {
             fractionArithmetic = new FractionArithmetic();
             fractionArithmetic.run();
         } catch (IOException e){
-            System.out.println("An error occurred while reading the input: " + e.getMessage());
+            System.out.println(RED + "An error occurred while reading the input: " + e.getMessage() + RESET);
         }
     } // end of the main method
 
@@ -33,7 +43,7 @@ public class FractionArithmetic {
 
             // if the user chose 'quit' :<
             if (choice == 6) {
-                System.out.println("Thank you for using the program! ");
+                System.out.println(GREEN + "Thank you for using the program! ");
                 break;
             }
             // if the user chose to reduce a fraction
@@ -85,18 +95,17 @@ public class FractionArithmetic {
      * @throws IOException If an I/O error occurs.
      */
     private int getUserChoice() throws IOException {
+        // Display the menu
+        displayMenu();
         while (true){
             try{
-                // Display the menu
-                displayMenu();
-
                 // Ask and read the input
                 System.out.print("Enter choice: ");
                 int choice = Integer.parseInt(read.readLine());
 
                 // Check if the choice is in the menu, if not, display error message and loop again
                 if(choice > 6 || choice < 1){
-                    System.out.println("Choice not found. Try again. ");
+                    System.out.println(RED + "Choice not found. Try again. " + RESET);
                     continue;
                 }
 
@@ -111,7 +120,8 @@ public class FractionArithmetic {
 
     // Display the menu of the program
     private void displayMenu() {
-        System.out.print("""
+        System.out.print(GREEN + BOLD + """
+                        
                         +-------------------------------+
                         | What do you want to do?       |
                         |                               |
@@ -122,29 +132,30 @@ public class FractionArithmetic {
                         |   <5>. Reduce a fraction      |
                         |   <6>. Quit                   |
                         +-------------------------------+
-                        """);
+                        """ + RESET);
     } // end of method -> displayMenu
 
 
 
-    // Set up a fraction by prompting the user for numerator and denominator
-    private Fraction setUpFraction(String fractionName) throws IOException {
-        Fraction fraction = new Fraction();
-        System.out.println("--------------------------------");
-        System.out.println("Setting up " + fractionName + " Fraction...");
-        setUpNumerator("Enter Numerator of " + fractionName + " Fraction: ", fraction);
-        setUpDenominator("Enter Denominator of " + fractionName + " Fraction: ", fraction);
-        return fraction;
-    }
-
-    // Set up the first fraction
+    // Set up first fraction
     private Fraction setUpFirstFraction() throws IOException {
-        return setUpFraction("First");
+        Fraction firstFraction = new Fraction();
+        System.out.println(PURPLE + "--------------------------------" + RESET);
+        System.out.println(BOLD + "Setting up First Fraction..." + RESET);
+        setUpNumerator("Enter Numerator of First Fraction: ", firstFraction);
+        setUpDenominator("Enter Denominator of First Fraction: ", firstFraction);
+        return firstFraction;
     }
 
-    // Set up the second fraction
+
+    // Set up second fraction
     private Fraction setUpSecondFraction() throws IOException {
-        return setUpFraction("Second");
+        Fraction secondFraction = new Fraction();
+        System.out.println(PURPLE + "--------------------------------" + RESET);
+        System.out.println(BOLD + "Setting up Second Fraction..." + RESET);
+        setUpNumerator("Enter Numerator of Second Fraction: ", secondFraction);
+        setUpDenominator("Enter Denominator of Second Fraction: ", secondFraction);
+        return secondFraction;
     }
 
 
@@ -160,7 +171,7 @@ public class FractionArithmetic {
         do {
             int denominator = readInteger(prompt);
             if (fraction.setDenominator(denominator)) return;
-            System.out.println("Denominator cannot be zero. Try again. ");
+            System.out.println(INVALID_DENOMINATOR);
         } while (true);
     }
 
@@ -180,18 +191,18 @@ public class FractionArithmetic {
 
     // Display the result of fraction arithmetic with format
     private void displayResult(Fraction firstFraction, Fraction secondFraction, Fraction result, String operation, String term) {
-        System.out.println("Result of " + term + " fractions:");
+        System.out.println(BOLD + "Result of " + term + " fractions:");
         System.out.println("╔═════════════════════════╗");
         System.out.printf("%-6s%9s%12s%n","║", firstFraction.toString(), "║");
         System.out.println("║          " + operation + "              ║");
         System.out.printf("%-6s%9s%12s%n","║", secondFraction.toString(), "║");
         System.out.println("║═════════════════════════║");
         if(result.toString().contains("/")) {
-            System.out.printf("%2s%9s%4s%.4f%n", " =", result, " or ", result.toDouble());
+            System.out.printf(GREEN + "%2s%9s%4s%.4f%n", " =", result, " or ", result.toDouble());
         } else {
-            System.out.printf("%3s%12s%n", "= ", result);
+            System.out.printf(GREEN + "%3s%12s%n", "= ",result);
         }
-        System.out.println("╚═════════════════════════╝\n\n");
+        System.out.println(RESET + BOLD + "╚═════════════════════════╝\n\n" + RESET);
     }
 
     // Display result for reducing fraction operation
