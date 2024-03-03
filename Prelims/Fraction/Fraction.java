@@ -56,17 +56,17 @@ public class Fraction {
     public boolean setDenominator(int denominator) {
         if (denominator == 0) return false;
         // If the numerator and denominator are negative, then the fraction is positive
-        if(getNumerator() < 0 && denominator < 0){
-            setNumerator(-getNumerator());
+        if(numerator < 0 && denominator < 0){
+            setNumerator(-numerator);
             this.denominator = -denominator;
-            return true;
         }
-        else if (denominator < 0 && getNumerator() > 0){
-            setNumerator(-getNumerator());
+        // If the denominator is negative and the numerator is positive, move the sign into the numerator
+        else if (denominator < 0 && numerator > 0){
+            setNumerator(-numerator);
             this.denominator = -denominator;
-            return true;
+        } else {
+            this.denominator = denominator;
         }
-        this.denominator = denominator;
         return true;
     } // end of method -> setDenominator
 
@@ -101,7 +101,7 @@ public class Fraction {
      */
     public double toDouble() {
         double decimal = (double) getNumerator() / getDenominator();
-        String decimalString = String.format("%.3f", decimal);
+        String decimalString = String.format("%.4f", decimal);
         return Double.parseDouble(decimalString);
     } // end of method -> toDouble
 
