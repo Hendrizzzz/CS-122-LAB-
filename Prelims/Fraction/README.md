@@ -11,7 +11,7 @@ The Fraction Arithmetic program provides a user-friendly interface for performin
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Features](#features)
-- [Documentation](#Fraction-Arithmetic-Program-Documentation)
+- [Documentation](#documentation)
 - [Contributing](#contributing)
 
 ## Getting Started
@@ -25,7 +25,7 @@ To run this program, make sure you have Java installed on your system. You can c
 ### Installation
 
 1. Clone this repository to your local machine:
-   git clone https://github.com/Hendrizzzz/fraction-arithmetic.git
+   git clone https://github.com/Hendrizzzz/CS-122-LAB-/tree/Fraction-Prelims-Final/Prelims/Fraction.git
    
 2. Navigate to the project directory:
   cd fraction-arithmetic
@@ -55,7 +55,7 @@ To use the program, follow these steps:
 - **Error Handling:** Handles invalid input and prevents division by zero.
 
 
-# Fraction Arithmetic Program Documentation
+## Documentation
 
 This Java program allows users to perform arithmetic operations on fractions. It consists of two main classes: `FractionArithmetic` and `Fraction`.
 
