@@ -137,25 +137,24 @@ public class FractionArithmetic {
 
 
 
-    // Set up first fraction
-    private Fraction setUpFirstFraction() throws IOException {
-        Fraction firstFraction = new Fraction();
+    // Set up a fraction with a specified prompt
+    private Fraction setUpFraction(String prompt) throws IOException {
+        Fraction fraction = new Fraction();
         System.out.println(PURPLE + "--------------------------------" + RESET);
-        System.out.println(BOLD + "Setting up First Fraction..." + RESET);
-        setUpNumerator("Enter Numerator of First Fraction: ", firstFraction);
-        setUpDenominator("Enter Denominator of First Fraction: ", firstFraction);
-        return firstFraction;
+        System.out.println(BOLD + "Setting up %s Fraction..." + RESET, prompt);
+        setUpNumerator("Enter Numerator of " + prompt + " Fraction: ", fraction);
+        setUpDenominator("Enter Denominator of " + prompt + " Fraction: ", fraction);
+        return fraction;
     }
 
+    // Set up first fraction
+    private Fraction setUpFirstFraction() throws IOException {
+        return setUpFraction("First");
+    }
 
     // Set up second fraction
     private Fraction setUpSecondFraction() throws IOException {
-        Fraction secondFraction = new Fraction();
-        System.out.println(PURPLE + "--------------------------------" + RESET);
-        System.out.println(BOLD + "Setting up Second Fraction..." + RESET);
-        setUpNumerator("Enter Numerator of Second Fraction: ", secondFraction);
-        setUpDenominator("Enter Denominator of Second Fraction: ", secondFraction);
-        return secondFraction;
+        return setUpFraction("Second");
     }
 
 
