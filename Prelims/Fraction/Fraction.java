@@ -56,12 +56,7 @@ public class Fraction {
     public boolean setDenominator(int denominator) {
         if (denominator == 0) return false;
         // If the numerator and denominator are negative, then the fraction is positive
-        if(numerator < 0 && denominator < 0){
-            setNumerator(-numerator);
-            this.denominator = -denominator;
-        }
-        // If the denominator is negative and the numerator is positive, move the sign into the numerator
-        else if (denominator < 0 && numerator > 0){
+        if(denominator < 0){
             setNumerator(-numerator);
             this.denominator = -denominator;
         } else {
@@ -134,8 +129,13 @@ public class Fraction {
      */
     public void reduce() {
         int gcd = computeGCD();
-        setNumerator(this.numerator / gcd);
-        setDenominator(this.denominator / gcd);
+        if (gcd != 0) {
+            setNumerator(this.numerator / gcd);
+            setDenominator(this.denominator / gcd);
+        } else {
+            // Handle the case where gcd is zero (optional)
+            System.out.println("Cannot reduce fraction: GCD is zero");
+        }
     }
 
     /**
@@ -148,14 +148,20 @@ public class Fraction {
         int numerator = getNumerator();
         int denominator = getDenominator();
 
+        if (numerator < denominator){
+            int temp = numerator;
+            numerator = denominator;
+            denominator = temp;
+        }
+
         // Euclid's algorithm to compute GCD
         while (denominator != 0) {
             int temp = denominator;
             denominator = numerator % denominator;
             numerator = temp;
         }
-        return numerator;
-    } // end of method -> computeGCD
+        return numerator;  // Return the GCD
+    }
 
 
 
