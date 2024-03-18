@@ -247,7 +247,7 @@ public class MixedFraction extends Fraction {
         if (whole == 0){
             return getNumerator() + "/" + getDenominator();
         } else if (getDenominator() == 1) {
-            return String.valueOf(getNumerator());
+            return String.valueOf(getWhole());
         } else if (getDenominator() == 0) {
             return "undefined"; // for division
         } else if (whole < 0 && getNumerator() < 0){
