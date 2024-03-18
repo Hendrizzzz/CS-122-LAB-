@@ -47,7 +47,8 @@ Extends the Fraction class to handle mixed fractions, which consist of a whole n
 ### FractionCalculatorGUI
 
 Provides a graphical user interface (GUI) for performing fraction calculations, including reducing fractions and performing arithmetic operations.
-![image](https://github.com/Hendrizzzz/CS-122-LAB-/assets/139997209/5694cd19-0371-4440-a08f-af65db56a416)
+![image](https://github.com/Hendrizzzz/CS-122-LAB-/assets/139997209/bd4f0fb8-d6a6-4a65-8c0b-546b109437fc)
+
 
 
 #### Constructor
