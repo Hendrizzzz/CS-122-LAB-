@@ -28,6 +28,7 @@ public class FractionCalculatorGUI extends JFrame {
 
      */
 
+    // The main 5 panels
     private JPanel titlePanel;
     private JPanel functionButtonPanel;
     private JPanel calculatorPanel;
@@ -44,9 +45,9 @@ public class FractionCalculatorGUI extends JFrame {
     final JButton calculateButton = new JButton("calculate");
     final JButton exitButton = new JButton("exit");
 
-    JComboBox<String> operation;
+    JComboBox<String> operation; // dropdown for operations
 
-    static boolean isReducePanelShowing = false;
+    static boolean isReducePanelShowing = false; // to determine which panel is showing, is it the reducePanel or calculatorPanel
 
     JPanel cardPanel;
     CardLayout cardLayout;
@@ -59,14 +60,17 @@ public class FractionCalculatorGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
 
-        setTitlePanel();
+        // Construct the 5 panels
+        setTitlePanel(); 
         setFunctionPanel();
         setCalculatorPanel();
         setResultPanel();
         setButtonsPanel();
 
+        // Set what layout will the contentPane will use
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
+        // Add the main 5 panels
         getContentPane().add(titlePanel);
         getContentPane().add(functionButtonPanel);
         getContentPane().add(calculatorPanel);
@@ -127,56 +131,48 @@ public class FractionCalculatorGUI extends JFrame {
 
 
     private void setCalculatorP(JPanel calculatorP) {
+        // First Fraction
         whole1 = new JTextField();
         whole1.setHorizontalAlignment(0);
         whole1.setPreferredSize(new Dimension(70, 40));
         whole1.setFont(font);
-
         numerator1 = new JTextField();
         numerator1.setHorizontalAlignment(0);
         numerator1.setPreferredSize(new Dimension(70, 40));
         numerator1.setFont(font);
-
         JLabel lineLabel = new JLabel("━━━━━━━━━━━━");
-
         denominator1 = new JTextField();
         denominator1.setPreferredSize(new Dimension(70, 40));
         denominator1.setHorizontalAlignment(0);
         denominator1.setFont(font);
-
         JPanel fraction = new JPanel(new GridLayout(3,1));
-
-        // Add components to the panel
         fraction.add(numerator1);
         fraction.add(lineLabel);
         fraction.add(denominator1);
 
+        // the operations to be used + - x ÷
         JComboBox<String> operation = getStringJComboBox();
 
+        // Second Fraction
         whole2 = new JTextField();
         whole2.setHorizontalAlignment(0);
         whole2.setPreferredSize(new Dimension(70, 40));
         whole2.setFont(font);
-
         numerator2 = new JTextField();
         numerator2.setHorizontalAlignment(0);
         numerator2.setPreferredSize(new Dimension(70, 40));
         numerator2.setFont(font);
-
         JLabel lineLabel1 = new JLabel("━━━━━━━━━━━━");
-
         denominator2 = new JTextField();
         denominator2.setPreferredSize(new Dimension(70, 40));
         denominator2.setHorizontalAlignment(0);
         denominator2.setFont(font);
-
         JPanel fraction1 = new JPanel(new GridLayout(3,1));
-
-        // Add components to the panel
         fraction1.add(numerator2);
         fraction1.add(lineLabel1);
         fraction1.add(denominator2);
 
+        // Add it to the one of the Main 5 panels
         calculatorP.setLayout(new FlowLayout());
         calculatorP.add(whole1);
         calculatorP.add(fraction);
@@ -187,6 +183,7 @@ public class FractionCalculatorGUI extends JFrame {
         calculatorP.add(fraction1);
     }
 
+    // method to center the text in operations
     private JComboBox<String> getStringJComboBox() {
         String[] items = {"+", "-", "x", "÷"};
         operation = new JComboBox<>(items);
@@ -203,33 +200,28 @@ public class FractionCalculatorGUI extends JFrame {
         operation.setFont(font);
         return operation;
     }
+    
 
     private void setReducePanel(JPanel reducePanel) {
         whole = new JTextField();
         whole.setHorizontalAlignment(0);
         whole.setPreferredSize(new Dimension(70, 40));
         whole.setFont(font);
-
         numerator = new JTextField();
         numerator.setHorizontalAlignment(0);
         numerator.setPreferredSize(new Dimension(70, 40));
         numerator.setFont(font);
-
         JLabel lineLabel = new JLabel("━━━━━━━━━━━━");
-
         denominator = new JTextField();
         denominator.setPreferredSize(new Dimension(70, 40));
         denominator.setHorizontalAlignment(0);
         denominator.setFont(font);
-
         JPanel fraction = new JPanel(new GridLayout(3,1));
-
-
-        // Add components to the panel
         fraction.add(numerator);
         fraction.add(lineLabel);
         fraction.add(denominator);
-
+        
+        // Add it to one of the main 5 panels
         reducePanel.add(whole);
         reducePanel.add(fraction);
     }
@@ -237,29 +229,30 @@ public class FractionCalculatorGUI extends JFrame {
 
     private void setResultPanel() {
         resultPanel = new JPanel(new GridLayout(2,1));
-
         JPanel resultContainer = new JPanel();
         errorMessage = new JLabel("", SwingConstants.CENTER);
         errorMessage.setForeground(Color.RED);
         resultTF = new JTextField("");
         resultTF.setHorizontalAlignment(JTextField.CENTER);
         resultTF.setPreferredSize(new Dimension(250, 40));
+        resultTF.setFont(font);
         JLabel resultText = new JLabel("Result: ");
         resultContainer.add(resultText);
         resultContainer.add(resultTF);
+        
+        // Add it to one of the main 5 panels
         resultPanel.add(resultContainer);
         resultPanel.add(errorMessage);
-        resultTF.setFont(font);
     }
 
     private void setButtonsPanel() {
         buttonPanel = new JPanel();
         ButtonHandler buttonHandler = new ButtonHandler();
-
         clearButton.addActionListener(buttonHandler);
         calculateButton.addActionListener(buttonHandler);
         exitButton.addActionListener(buttonHandler);
 
+        // Add to one of the main 5 panels
         buttonPanel.add(clearButton);
         buttonPanel.add(calculateButton);
         buttonPanel.add(exitButton);
@@ -271,8 +264,8 @@ public class FractionCalculatorGUI extends JFrame {
 
 
 
+    // The actions listeners for buttons
     private class ButtonHandler implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             Object choice = e.getSource();
