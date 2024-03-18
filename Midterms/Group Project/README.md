@@ -67,3 +67,47 @@ Provides a graphical user interface (GUI) for performing fraction calculations, 
 - Java AWT for layout management and event handling.
 
 
+## FractionTester 
+- for console based. This application operates entirely in the console and does not have a graphical user interface (GUI).
+
+## Class Structure
+
+The `FractionTester` class consists of methods and functionalities to handle user input, perform arithmetic operations, and display results. Here's an overview of its structure:
+
+- **Main Method**: The entry point of the program. Initializes the `FractionTester` object and invokes the `run()` method to start the application.
+
+- **Run Method**: The main logic of the program. It continuously prompts the user for input and performs operations based on user choices until the user decides to quit.
+
+- **Operation Methods**: Methods to perform arithmetic operations and reduce fractions to their simplest form.
+
+- **Input Methods**: Methods to read user input, including fractions, operation choices, and menu options.
+
+- **Display Methods**: Methods to format and display results in the console.
+
+## Methods
+
+### Main Method
+- `main(String[] args)`: Entry point of the program. Creates a `FractionTester` object and invokes the `run()` method.
+
+### Run Method
+- `run()`: Main logic of the program. Continuously prompts the user for input and performs operations based on user choices.
+
+### Operation Methods
+- `operate(int operation, int typeOfFractions)`: Performs the specified arithmetic operation on the given types of fractions.
+- `performFractionOperation(T first, U second, int operation)`: Performs the specified operation on two fractions.
+- `reduce(int typeOfFraction)`: Reduces the given fraction to its simplest form.
+
+### Input Methods
+- `readTypeOfFraction()`: Reads the type of fraction to reduce from the user input.
+- `readTypeOfFractions()`: Reads the types of fractions involved in an operation from the user input.
+- `readOperation()`: Reads the operation to perform from the user input.
+- `readMenuOption(int max)`: Reads a menu option from the user input.
+- `readInteger(String promptMessage)`: Reads an integer value from the user input.
+
+### Display Methods
+- `displayResult(Fraction firstFraction, Fraction secondFraction, Fraction resultingFraction, String operation)`: Displays the result of a fraction arithmetic operation.
+- `displayResult(MixedFraction fraction, MixedFraction result)`: Displays the result of reducing a fraction.
+
+
+
+
