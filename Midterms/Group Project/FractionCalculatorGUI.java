@@ -200,7 +200,7 @@ public class FractionCalculatorGUI extends JFrame {
         operation.setFont(font);
         return operation;
     }
-    
+
 
     private void setReducePanel(JPanel reducePanel) {
         whole = new JTextField();
@@ -220,7 +220,7 @@ public class FractionCalculatorGUI extends JFrame {
         fraction.add(numerator);
         fraction.add(lineLabel);
         fraction.add(denominator);
-        
+
         // Add it to one of the main 5 panels
         reducePanel.add(whole);
         reducePanel.add(fraction);
@@ -239,7 +239,7 @@ public class FractionCalculatorGUI extends JFrame {
         JLabel resultText = new JLabel("Result: ");
         resultContainer.add(resultText);
         resultContainer.add(resultTF);
-        
+
         // Add it to one of the main 5 panels
         resultPanel.add(resultContainer);
         resultPanel.add(errorMessage);
@@ -274,19 +274,7 @@ public class FractionCalculatorGUI extends JFrame {
                 System.exit(0);
             }
             else if (choice == clearButton){
-                if (isReducePanelShowing){
-                    whole.setText("");
-                    numerator.setText("");
-                    denominator.setText("");
-                } else {
-                    whole1.setText("");
-                    numerator1.setText("");
-                    denominator1.setText("");
-                    whole2.setText("");
-                    numerator2.setText("");
-                    denominator2.setText("");
-                }
-                errorMessage.setText("");
+                clearTextFields();
             }
             else if (choice == calculateButton){
                 errorMessage.setText("");
@@ -295,17 +283,33 @@ public class FractionCalculatorGUI extends JFrame {
                 } else {
                     performArithmetic();
                 }
-            } else if (choice == reduceButton){
+            } else {
                 resultTF.setText("");
                 errorMessage.setText("");
-                cardLayout.show(cardPanel, "panel1");
-                isReducePanelShowing = true;
-            } else if (choice == calculatorButton){
-                resultTF.setText("");
-                errorMessage.setText("");
-                cardLayout.show(cardPanel, "panel2");
-                isReducePanelShowing = false;
+                if (choice == reduceButton) {
+                    cardLayout.show(cardPanel, "panel1");
+                    isReducePanelShowing = true;
+                } else if (choice == calculatorButton) {
+                    cardLayout.show(cardPanel, "panel2");
+                    isReducePanelShowing = false;
+                }
             }
+        }
+
+        private void clearTextFields() {
+            if (isReducePanelShowing){
+                whole.setText("");
+                numerator.setText("");
+                denominator.setText("");
+            } else {
+                whole1.setText("");
+                numerator1.setText("");
+                denominator1.setText("");
+                whole2.setText("");
+                numerator2.setText("");
+                denominator2.setText("");
+            }
+            errorMessage.setText("");
         }
 
         private void reduce() {
