@@ -202,7 +202,11 @@ public class MixedFraction extends Fraction {
         if (Math.abs(getNumerator()) < getDenominator()){
             return;
         }
-        setWholePart(whole + (getNumerator()/getDenominator()));
+        if (whole < 0){
+            setWholePart(-(-whole + getNumerator()/getDenominator()));
+        } else {
+            setWholePart(whole + getNumerator()/getDenominator());
+        }
         setNumerator(getNumerator() % getDenominator());
     }
 
