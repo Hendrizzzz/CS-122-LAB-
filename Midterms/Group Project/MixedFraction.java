@@ -42,6 +42,7 @@ public class MixedFraction extends Fraction {
         if (getNumerator() < 0 && whole != 0) {
             this.whole = -whole;
             setNumerator(-getNumerator());
+            return;
         }
         this.whole = whole;
     }
@@ -118,7 +119,7 @@ public class MixedFraction extends Fraction {
      * @return A new MixedFraction object equivalent to the current MixedFraction.
      */
     private MixedFraction getMixedFraction(){
-        return new MixedFraction(whole, getNumerator(), getDenominator());
+        return new MixedFraction(whole, getFractionPart());
     }
 
 
@@ -234,7 +235,7 @@ public class MixedFraction extends Fraction {
             return new MixedFraction(improperFraction);
         }
         int wholeNumber = improperFraction.getNumerator()/improperFraction.getDenominator();
-        int numerator = improperFraction.getNumerator() % improperFraction.getDenominator();
+        int numerator = Math.abs(improperFraction.getNumerator()) % improperFraction.getDenominator();
         MixedFraction result = new MixedFraction(wholeNumber, numerator, improperFraction.getDenominator());
         if (result.getWhole() < 0 && result.getNumerator() < 0){
             result.setNumerator(-result.getNumerator());
@@ -244,7 +245,10 @@ public class MixedFraction extends Fraction {
 
     @Override
     public String toString(){
-        if (whole == 0){
+        if (whole == 0 && getNumerator() == 0){
+            return "" + 0;
+        }
+        else if (whole == 0){
             return getNumerator() + "/" + getDenominator();
         } else if (getDenominator() == 1) {
             return String.valueOf(getWhole());
