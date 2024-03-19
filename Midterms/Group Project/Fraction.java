@@ -19,13 +19,9 @@ public class Fraction {
 
     // Constructor with parameters
     public Fraction(int numerator, int denominator){
-        // Check if the fraction has both numerator and denominator negative, then the fraction is positive
-        if (numerator < 0 && denominator < 0){
-            this.numerator = Math.abs(numerator);
-            this.denominator = Math.abs(denominator);
-            return;
+        if (denominator == 0){
+            throw new ArithmeticException();
         }
-
         // Check if the denominator is negative and the numerator is positive, place the negative sign on the numerator for better readability on output
         else if (denominator < 0){
             this.numerator = -numerator;
